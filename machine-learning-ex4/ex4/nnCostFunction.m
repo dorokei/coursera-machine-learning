@@ -62,7 +62,6 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
-
 for i = 1:m
     yVctor = zeros(num_labels,1);
     yVctor(y(i)) = 1;
@@ -78,6 +77,13 @@ for i = 1:m
     h = a3 = sigmoid(z3);
 
     J = J - sum(yVctor.*log(h) + (1-yVctor).*log(1-h))/m;
+
+    delta3 = a3 - yVctor;
+    delta2 = Theta2'*delta3.*sigmoidGradient([1; z2]);
+    delta2 = delta2(2:end);
+
+    Theta1_grad = Theta1_grad + delta2*a1';
+    Theta2_grad = Theta2_grad + delta3*a2';
 end
 
 tmp_theta1 = Theta1;
@@ -88,19 +94,8 @@ tmp_theta2(:,1) = 0;
 
 J = J + lambda/2/m*sum(sum(tmp_theta1.^2)) + lambda/2/m*sum(sum(tmp_theta2.^2));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+Theta1_grad = Theta1_grad/m;
+Theta2_grad = Theta2_grad/m;
 
 % -------------------------------------------------------------
 
