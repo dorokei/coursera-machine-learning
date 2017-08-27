@@ -94,8 +94,8 @@ tmp_theta2(:,1) = 0;
 
 J = J + lambda/2/m*sum(sum(tmp_theta1.^2)) + lambda/2/m*sum(sum(tmp_theta2.^2));
 
-Theta1_grad = Theta1_grad/m;
-Theta2_grad = Theta2_grad/m;
+Theta1_grad = Theta1_grad/m + lambda/m*tmp_theta1;
+Theta2_grad = Theta2_grad/m + lambda/m*tmp_theta2;
 
 % -------------------------------------------------------------
 
