@@ -62,11 +62,8 @@ for i = 1:m
 
   error_train(i) = sum(([ones(tmp_m, 1) tmp_X]*theta - tmp_y).^2)/2/tmp_m;
 
-  tmp_X = Xval;
-  tmp_y = yval;
-  tmp_m = size(tmp_X, 1);
-
-  error_val(i) = sum(([ones(tmp_m, 1) tmp_X]*theta - tmp_y).^2)/2/tmp_m;
+  tmp_m = size(Xval, 1);
+  error_val(i) = sum(([ones(tmp_m, 1) Xval]*theta - yval).^2)/2/tmp_m;
 end
 
 
