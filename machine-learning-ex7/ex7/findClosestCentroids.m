@@ -26,7 +26,9 @@ m = size(X, 1);
 
 for i = 1:m
   x = X(i,:);
-  diffs = sum((x .- centroids).^2,2);
+
+  % https://stackoverflow.com/questions/5342857/how-to-subtract-a-vector-from-each-row-of-a-matrix
+  diffs = sum((centroids - ones(size(centroids))*diag(x)).^2,2);
   [v,j]=min(diffs);
   idx(i) = j;
 end
